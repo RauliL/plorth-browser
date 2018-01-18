@@ -15,7 +15,7 @@ scripts with `<script type="application/plorth">`, like this:
 <html>
   <head>
     <title>Plorth in a browser example</title>
-    <script src="./plorth.min.js"></script>
+    <script src="https://unpkg.com/plorth-browser@1.0.0-beta.1/plorth.min.js"></script>
   </head>
   <body>
     <script type="application/plorth">
