@@ -22,9 +22,9 @@ import PlorthRuntime from 'plorth-interpreter';
       .forEach(tag => {
         if (tag.src) {
           fetch(tag.src)
-            .then(response => {
-              runtime.eval(response.text());
-            })
+            .then(response => response.text().then(text => {
+              runtime.eval(text);
+            }))
             .catch(error => {
               console.error(error);
             });
