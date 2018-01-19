@@ -4,9 +4,16 @@
     <title>Plorth in browser: 99 bottles of beer</title>
     <meta charset="utf-8">
     <script src="../plorth.min.js"></script>
+    <script>
+      window.Plorth.print = function (text) {
+        const p = document.createElement('p');
+
+        p.innerText = text;
+        document.body.appendChild(p);
+      };
+    </script>
   </head>
   <body>
-    <p>Open console to see results.</p>
     <script type="application/plorth">
       # Print the first few Fibonacci numbers
 

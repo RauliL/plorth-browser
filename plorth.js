@@ -1,8 +1,8 @@
 import PlorthRuntime from 'plorth-interpreter';
 
-window.addEventListener('DOMContentLoaded', () => {
-  const noConflict = window.Plorth;
+(() => {
   const runtime = new PlorthRuntime();
+  const noConflict = window.Plorth;
 
   // Expose the interpreter as global variable.
   window.Plorth = runtime;
@@ -16,19 +16,21 @@ window.addEventListener('DOMContentLoaded', () => {
   // "application/plorth" set as their type. Evaluate Plorth
   // scripts found from those tags each in their own execution
   // context.
-  Array.from(document.getElementsByTagName('script'))
-    .filter(tag => tag.getAttribute('type') === 'application/plorth')
-    .forEach(tag => {
-      if (tag.src) {
-        fetch(tag.src)
-          .then(response => {
-            runtime.eval(response.text());
-          })
-          .catch(error => {
-            console.error(error);
-          });
-      } else {
-        runtime.eval(tag.innerText);
-      }
-    });
-});
+  window.addEventListener('DOMContentLoaded', () => {
+    Array.from(document.getElementsByTagName('script'))
+      .filter(tag => tag.getAttribute('type') === 'application/plorth')
+      .forEach(tag => {
+        if (tag.src) {
+          fetch(tag.src)
+            .then(response => {
+              runtime.eval(response.text());
+            })
+            .catch(error => {
+              console.error(error);
+            });
+        } else {
+          runtime.eval(tag.innerText);
+        }
+      });
+  });
+})();
